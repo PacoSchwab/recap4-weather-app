@@ -1,12 +1,15 @@
-import { useState } from "react";
+/* import { useState } from "react"; */
 
-export default function EntryForm({ onAddActivity }) {
+export default function EntryForm({ onAddActivity, isGoodWeather }) {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
 
-const newActivity = {name: data.name, isGoodWeather: data.isForGoodWeather};
+    const newActivity = {
+      name: data.name,
+      isGoodWeather: data.isForGoodWeather.isChecked,
+    };
 
     onAddActivity(newActivity);
 
@@ -29,9 +32,12 @@ const newActivity = {name: data.name, isGoodWeather: data.isForGoodWeather};
           type="checkbox"
           name="isForGoodWeather"
           id="isForGoodWeather"
+          checked={isGoodWeather}
         ></input>
-      </div>     
-         <button type="submit" className="entry-form__button">Submit</button>      
+      </div>
+      <button type="submit" className="entry-form__button">
+        Submit
+      </button>
     </form>
   );
 }
