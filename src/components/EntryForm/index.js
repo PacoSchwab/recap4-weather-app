@@ -1,28 +1,38 @@
-export default function EntryForm() {
+import { useState } from "react";
 
+export default function EntryForm({ onAddActivity }) {
+  function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
 
-    return(
-<form className="entry-form" onSubmit="">
-    <h2>Add new Activity</h2>
+    onAddActivity(data.name, data.isForGoodWeather.checked);
 
-        <div className="entry-form__field">
-            <label htmlFor="activity">Name:</label>
-            <input type="text" name="activity" id="activity"></input>            
-        </div>
+    event.target.reset();
+    event.target.elements.activity.focus();
+  }
 
+  return (
+    <form className="entry-form" onSubmit={handleSubmit}>
+      <h2>Add new Activity</h2>
 
-        <div className="entry-form__field">
-            <label htmlFor="goodWeather">Good-weather activity:</label>
-            <input type="checkbox" name="goodWeather" id="goodWeather"></input>            
-        </div>
+      <div className="entry-form__field">
+        <label htmlFor="name">Name:</label>
+        <input type="text" name="name" id="name"></input>
+      </div>
 
-        <div className="entry-form__button-wrapper">
+      <div className="entry-form__field">
+        <label htmlFor="isForGoodWeather">Good-weather activity:</label>
+        <input
+          type="checkbox"
+          name="isForGoodWeather"
+          id="isForGoodWeather"
+        ></input>
+      </div>
+
+      <div className="entry-form__button-wrapper">
         {/*  <Button type="submit">Submit</Button> */}
-        </div>
-
-
-
-</form>
-
-    )
-};
+      </div>
+    </form>
+  );
+}
