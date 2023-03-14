@@ -1,16 +1,20 @@
 import "./App.css";
 import EntryForm from "./components/EntryForm";
 import { useState } from "react";
+import { uid } from "uid";
 
 // Structure: WeatherDisplay, WeatherIcon, EntriesSection, Entries, EntryForm, GoodWeatherChechbox, Button
 
 function App() {
-  const [name, setName] = useState("");
-  const [isGoodWeather, setIsGoodWeather] = useState(false);
+  const [activities, setActivities] = useState("");
+
+function handleAddActivity (newActivityEntry) {
+    setActivities([...activities, {id: uid (), ...newActivityEntry}]);
+}
 
   return (
     <main className="app__main">
-      <EntryForm />
+      <EntryForm onAddActivity={handleAddActivity} />
     </main>
   );
 }

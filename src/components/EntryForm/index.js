@@ -6,10 +6,12 @@ export default function EntryForm({ onAddActivity }) {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
 
-    onAddActivity(data.name, data.isForGoodWeather.checked);
+const newActivity = {name: data.name, isGoodWeather: data.isForGoodWeather};
+
+    onAddActivity(newActivity);
 
     event.target.reset();
-    event.target.elements.activity.focus();
+    event.target.elements.name.focus();
   }
 
   return (
@@ -28,11 +30,8 @@ export default function EntryForm({ onAddActivity }) {
           name="isForGoodWeather"
           id="isForGoodWeather"
         ></input>
-      </div>
-
-      <div className="entry-form__button-wrapper">
-        {/*  <Button type="submit">Submit</Button> */}
-      </div>
+      </div>     
+         <button type="submit" className="entry-form__button">Submit</button>      
     </form>
   );
 }
