@@ -1,4 +1,4 @@
-/* import { useState } from "react"; */
+import { useState } from "react";
 
 export default function EntryForm({ onAddActivity, isGoodWeather }) {
   function handleSubmit(event) {
@@ -8,9 +8,10 @@ export default function EntryForm({ onAddActivity, isGoodWeather }) {
 
     const newActivity = {
       name: data.name,
-      isGoodWeather: data.isForGoodWeather.isChecked,
+      isGoodWeather: !!data.isForGoodWeather
     };
 
+    console.log(newActivity)
     onAddActivity(newActivity);
 
     event.target.reset();

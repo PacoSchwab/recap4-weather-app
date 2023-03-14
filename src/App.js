@@ -7,7 +7,7 @@ import EntriesSection from "./components/EntriesSection";
 // Structure: WeatherDisplay, WeatherIcon, EntriesSection, Entries, EntryForm, GoodWeatherChechbox, Button
 
 function App() {
-  const [activities, setActivities] = useState("");
+  const [activities, setActivities] = useState([]);
 
   function handleAddActivity(newActivityEntry) {
     setActivities([...activities, { id: uid(), ...newActivityEntry }]);
@@ -15,7 +15,7 @@ function App() {
 
   return (
     <main className="app__main">
-      {<EntriesSection />}
+      <EntriesSection activities={activities} />
       <br />
       <EntryForm onAddActivity={handleAddActivity} />
     </main>
